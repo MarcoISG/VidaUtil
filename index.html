@@ -1,40 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trazabilidad GYN Juan Maestro</title>
     <style>
-        :root { --red-jm: #e30613; --yellow-jm: #ffc20e; --dark: #2d2d2d; --gray: #f8f9fa; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--gray); margin: 0; padding: 15px; }
-        .container { max-width: 500px; margin: auto; }
-        
-        .header { text-align: center; margin-bottom: 25px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .logo { width: 140px; margin-bottom: 10px; }
-        h2 { margin: 0; color: var(--dark); font-size: 1.4em; }
-        .reloj { font-size: 0.85em; color: #666; margin-top: 10px; font-weight: bold; }
-        
-        .search-box { width: 100%; padding: 18px; border-radius: 30px; border: 2px solid #ddd; font-size: 16px; margin-bottom: 20px; box-sizing: border-box; outline: none; transition: 0.3s; }
-        .search-box:focus { border-color: var(--red-jm); box-shadow: 0 0 10px rgba(227, 6, 19, 0.2); }
-        
-        .card { background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; border-left: 8px solid var(--red-jm); box-shadow: 0 8px 15px rgba(0,0,0,0.08); animation: fadeIn 0.4s ease; }
-        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f2f2f2; }
-        .label { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
-        .value { font-size: 0.95em; color: var(--dark); font-weight: 700; text-align: right; }
-        
+        :root {
+            --red-jm: #e30613;
+            --yellow-jm: #ffc20e;
+            --dark: #2d2d2d;
+            --gray: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: var(--gray);
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            width: 140px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.4em;
+        }
+
+        .reloj {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 18px;
+            border-radius: 30px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: var(--red-jm);
+            box-shadow: 0 0 10px rgba(227, 6, 19, 0.2);
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 8px solid var(--red-jm);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .label {
+            font-size: 0.7em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .value {
+            font-size: 0.95em;
+            color: var(--dark);
+            font-weight: 700;
+            text-align: right;
+        }
+
         .rotulo {
-            margin-top: 15px;
+            margin-bottom: 15px;
             padding: 10px;
             border-radius: 8px;
             color: white;
             font-weight: bold;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -45,7 +123,7 @@
             opacity: 0.9;
             margin-bottom: 2px;
         }
-        
+
         .rotulo-day {
             font-size: 1.4em;
             text-transform: uppercase;
@@ -55,166 +133,221 @@
 
         .rotulo-date {
             font-size: 1.1em;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 2px 8px;
             border-radius: 4px;
         }
 
         /* Colores por día */
-        .day-lunes { background-color: #007bff; } /* Azul */
-        .day-martes { background-color: #ffc107; color: #333; } /* Amarillo */
-        .day-miercoles { background-color: #dc3545; } /* Rojo */
-        .day-jueves { background-color: #795548; } /* Café */
-        .day-viernes { background-color: #28a745; } /* Verde */
-        .day-sabado { background-color: #fd7e14; } /* Naranja */
-        .day-domingo { background-color: #343a40; } /* Negro */
+        .day-lunes {
+            background-color: #007bff;
+        }
 
-        .tag-status { background: var(--yellow-jm); color: var(--dark); padding: 4px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; display: inline-block; margin: 15px 0 5px; }
-        .vencimiento { color: var(--red-jm); font-size: 1.1em; }
+        /* Azul */
+        .day-martes {
+            background-color: #ffc107;
+            color: #333;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Amarillo */
+        .day-miercoles {
+            background-color: #dc3545;
+        }
+
+        /* Rojo */
+        .day-jueves {
+            background-color: #795548;
+        }
+
+        /* Café */
+        .day-viernes {
+            background-color: #28a745;
+        }
+
+        /* Verde */
+        .day-sabado {
+            background-color: #fd7e14;
+        }
+
+        /* Naranja */
+        .day-domingo {
+            background-color: #343a40;
+        }
+
+        /* Negro */
+
+        .tag-status {
+            background: var(--yellow-jm);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin: 15px 0 5px;
+        }
+
+        .vencimiento {
+            color: var(--red-jm);
+            font-size: 1.1em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <div class="header">
-        <img src="Gemini_Generated_Image_8n6qou8n6qou8n6q.png" alt="Juan Maestro" class="logo">
-        <h2>Control de Trazabilidad</h2>
-        <div class="reloj" id="reloj">Cargando fecha...</div>
+    <div class="container">
+        <div class="header">
+            <img src="Gemini_Generated_Image_8n6qou8n6qou8n6q.png" alt="Juan Maestro" class="logo">
+            <h2>Control de Trazabilidad</h2>
+            <div class="reloj" id="reloj">Cargando fecha...</div>
+        </div>
+
+        <input type="text" id="buscador" class="search-box" placeholder="🔍 Buscar Pan, Pollo, Salsas..."
+            onkeyup="buscar()">
+        <div id="resultado"></div>
     </div>
-    
-    <input type="text" id="buscador" class="search-box" placeholder="🔍 Buscar Pan, Pollo, Salsas..." onkeyup="buscar()">
-    <div id="resultado"></div>
-</div>
 
-<script>
-    // BASE DE DATOS UNIFICADA Y SIN REPETICIONES
-    const baseDatos = [
-        // PANES
-        { "insumo": "Aderezo Cesar", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Aji Verde", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Aji Verde (Una Vez Abierto) ", "area": "Refrigerador", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Americana", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Base Batidos Preparada", "area": "Máquina Batidos", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Cebolla Morada", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Cebolla Pluma", "area": "Refrigerado Abierto", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Cebolla salteada", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Cesar (Abierto)", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
-{ "insumo": "Chimichurri (Elaborado)", "area": "Refrigerado Elaborado", "n_horas": 72, "condicion": "0°C a 5°C" },
-{ "insumo": "Chimichurry", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Choclo cocido", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Chocolate (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Chucrut", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Churrasco (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Crema Chantilly (Spray)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Empanadas", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
-{ "insumo": "Filetillos", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
-{ "insumo": "Huevo Sanitizado", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Ketchup (Server)", "area": "Libre Demanda", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Mix Primavera", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Mix Primavera (Una Vez Abierto)", "area": "Salsera", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Lomo (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Lomo Cerdo", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
-{ "insumo": "Mango Maracuya (Bolsa)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Manjar (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
-{ "insumo": "Mayonesa", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
-{ "insumo": "Mayonesa ChimiChurri", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
-{ "insumo": "Mayonesa Merken", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
-{ "insumo": "Mechada", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
-{ "insumo": "Mix Berries", "area": "Descongelación", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Mix Saltado (Cebolla-Pimenton)", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Mora (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Mostaza (Server)", "area": "Libre Demanda", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Palmito", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Palmito en su jugo", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
-{ "insumo": "Palta", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
-{ "insumo": "Pan As", "area": "Descongelación", "n_horas": 168, "condicion": "7 Días" },
-{ "insumo": "Pan Baguette", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Pan Brioche", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Pan Chiabata", "area": "Descongelación", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Pan Frica", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Pan Hot Dog (Copihue)", "area": "Panadería", "n_horas": 171, "condicion": "3 hrs desc. + 7 días vida útil" },
-{ "insumo": "Pan Molde", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Papas", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
-{ "insumo": "Pollo (Caliente)", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
-{ "insumo": "Pollo (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Poroto Verde", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Pulpas de Frutas", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
-{ "insumo": "Queso", "area": "Refrigerado abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Queso Estrellado", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
-{ "insumo": "Tocino", "area": "Refrigerado abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
-{ "insumo": "Tocino Preparado", "area": "Preparado", "n_horas": 24, "condicion": "Ambiente" },
-{ "insumo": "Tomate", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
-{ "insumo": "Vienesa", "area": "Baño Maria", "n_horas": 1, "condicion": "Sobre 65°C" },
-{ "insumo": "Lechuga Mix Envase Original", "area": "Refrigerador", "n_horas": 48, "condicion": "0°C a 5°C" }
-    ];
-
-    function formatearTiempo(h) {
-        if (h < 1) return Math.round(h * 60) + " Minutos";
-        if (h < 24) return h + " Horas";
-        const dias = Math.floor(h / 24);
-        const resto = h % 24;
-        let texto = dias + (dias === 1 ? " Día" : " Días");
-        if (resto > 0) texto += " y " + resto + " Hrs";
-        return texto;
-    }
-
-    function obtenerClaseDia(indiceDia) {
-        const clases = [
-            'day-domingo', 'day-lunes', 'day-martes', 'day-miercoles', 
-            'day-jueves', 'day-viernes', 'day-sabado'
+    <script>
+        // BASE DE DATOS UNIFICADA Y SIN REPETICIONES
+        const baseDatos = [
+            // PANES
+            { "insumo": "Aderezo Cesar", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Aji Verde", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Aji Verde (Una Vez Abierto) ", "area": "Refrigerador", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Americana", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Base Batidos Preparada", "area": "Máquina Batidos", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Cebolla Morada", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Cebolla Pluma", "area": "Refrigerado Abierto", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Cebolla salteada", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Cesar (Abierto)", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
+            { "insumo": "Chimichurri (Elaborado)", "area": "Refrigerado Elaborado", "n_horas": 72, "condicion": "0°C a 5°C" },
+            { "insumo": "Chimichurry", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Choclo cocido", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Chocolate (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Chucrut", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Churrasco (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Crema Chantilly (Spray)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Empanadas", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
+            { "insumo": "Filetillos", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
+            { "insumo": "Huevo Sanitizado", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Ketchup (Server)", "area": "Libre Demanda", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Mix Primavera", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Mix Primavera (Una Vez Abierto)", "area": "Salsera", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Lomo (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Lomo Cerdo", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
+            { "insumo": "Mango Maracuya (Bolsa)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Manjar (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
+            { "insumo": "Mayonesa", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
+            { "insumo": "Mayonesa ChimiChurri", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
+            { "insumo": "Mayonesa Merken", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
+            { "insumo": "Mechada", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
+            { "insumo": "Mix Berries", "area": "Descongelación", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Mix Saltado (Cebolla-Pimenton)", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Mora (Bolsa/Mamadera)", "area": "Refrigerado Abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Mostaza (Server)", "area": "Libre Demanda", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Palmito", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Palmito en su jugo", "area": "Refrigerado Abierto", "n_horas": 72, "condicion": "0°C a 5°C" },
+            { "insumo": "Palta", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
+            { "insumo": "Pan As", "area": "Descongelación", "n_horas": 168, "condicion": "7 Días" },
+            { "insumo": "Pan Baguette", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Pan Brioche", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Pan Chiabata", "area": "Descongelación", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Pan Frica", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Pan Hot Dog (Copihue)", "area": "Panadería", "n_horas": 171, "condicion": "3 hrs desc. + 7 días vida útil" },
+            { "insumo": "Pan Molde", "area": "Panadería", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Papas", "area": "Mantenedor de Fritos", "n_horas": 0.12, "condicion": "Sobre 65°C" },
+            { "insumo": "Pollo (Caliente)", "area": "Baño Maria", "n_horas": 4, "condicion": "Sobre 65°C" },
+            { "insumo": "Pollo (Descongelado)", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Poroto Verde", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Pulpas de Frutas", "area": "Descongelación", "n_horas": 48, "condicion": "0°C a 5°C" },
+            { "insumo": "Queso", "area": "Refrigerado abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Queso Estrellado", "area": "Salsera", "n_horas": 24, "condicion": "0°C a 5°C" },
+            { "insumo": "Tocino", "area": "Refrigerado abierto", "n_horas": 96, "condicion": "0°C a 5°C" },
+            { "insumo": "Tocino Preparado", "area": "Preparado", "n_horas": 24, "condicion": "Ambiente" },
+            { "insumo": "Tomate", "area": "Salsera", "n_horas": 4, "condicion": "0°C a 5°C" },
+            { "insumo": "Vienesa", "area": "Baño Maria", "n_horas": 1, "condicion": "Sobre 65°C" },
+            { "insumo": "Lechuga Mix Envase Original", "area": "Refrigerador", "n_horas": 48, "condicion": "0°C a 5°C" }
         ];
-        return clases[indiceDia];
-    }
 
-    function obtenerNombreDia(indiceDia) {
-        const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-        return dias[indiceDia];
-    }
+        function formatearTiempo(h) {
+            if (h < 1) return Math.round(h * 60) + " Minutos";
+            if (h < 24) return h + " Horas";
+            const dias = Math.floor(h / 24);
+            const resto = h % 24;
+            let texto = dias + (dias === 1 ? " Día" : " Días");
+            if (resto > 0) texto += " y " + resto + " Hrs";
+            return texto;
+        }
 
-    setInterval(() => {
-        const n = new Date();
-        document.getElementById('reloj').innerText = n.toLocaleString('es-CL');
-    }, 1000);
+        function obtenerClaseDia(indiceDia) {
+            const clases = [
+                'day-domingo', 'day-lunes', 'day-martes', 'day-miercoles',
+                'day-jueves', 'day-viernes', 'day-sabado'
+            ];
+            return clases[indiceDia];
+        }
 
-    function buscar() {
-        const q = document.getElementById('buscador').value.toLowerCase().trim();
-        const res = document.getElementById('resultado');
-        res.innerHTML = "";
-        
-        if(q.length < 2) return;
+        function obtenerNombreDia(indiceDia) {
+            const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            return dias[indiceDia];
+        }
 
-        const coincidencias = baseDatos.filter(i => i.insumo.toLowerCase().includes(q));
+        setInterval(() => {
+            const n = new Date();
+            document.getElementById('reloj').innerText = n.toLocaleString('es-CL');
+        }, 1000);
 
-        coincidencias.forEach(p => {
-            const ahora = new Date();
-            const venc = new Date(ahora.getTime() + (p.n_horas * 60 * 60 * 1000));
-            const diaVencimiento = venc.getDay();
-            const claseDia = obtenerClaseDia(diaVencimiento);
-            const nombreDia = obtenerNombreDia(diaVencimiento);
+        function buscar() {
+            const q = document.getElementById('buscador').value.toLowerCase().trim();
+            const res = document.getElementById('resultado');
+            res.innerHTML = "";
 
-            res.innerHTML += `
+            if (q.length < 2) return;
+
+            const coincidencias = baseDatos.filter(i => i.insumo.toLowerCase().includes(q));
+
+            coincidencias.forEach(p => {
+                const ahora = new Date();
+                const venc = new Date(ahora.getTime() + (p.n_horas * 60 * 60 * 1000));
+                const diaVencimiento = venc.getDay();
+                const claseDia = obtenerClaseDia(diaVencimiento);
+                const nombreDia = obtenerNombreDia(diaVencimiento);
+
+                res.innerHTML += `
                 <div class="card">
-                    <div style="font-size:1.2em; font-weight:bold; color:var(--red-jm)">${p.insumo}</div>
+                    <div class="rotulo ${claseDia}">
+                        <div class="rotulo-header">${p.insumo}</div>
+                        <div class="rotulo-day">${nombreDia}</div>
+                        <div class="rotulo-date">${venc.toLocaleDateString()} ${venc.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                    </div>
+                    
+                    <div style="font-size:1.2em; font-weight:bold; color:var(--red-jm); text-align:center; display:none">${p.insumo}</div>
                     <div class="row"><span class="label">Área</span><span class="value">${p.area}</span></div>
                     <div class="row"><span class="label">Condición</span><span class="value">${p.condicion}</span></div>
                     <div class="row"><span class="label">Vida Útil</span><span class="value">${formatearTiempo(p.n_horas)}</span></div>
                     
                     <div class="tag-status">CÁLCULO DE VENCIMIENTO</div>
-                    <div class="row"><span class="label">Inicio</span><span class="value">${ahora.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span></div>
+                    <div class="row"><span class="label">Inicio</span><span class="value">${ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
                     <div class="row"><span class="label">Vence el</span><span class="value vencimiento">${venc.toLocaleDateString()}</span></div>
-                    <div class="row"><span class="label">Hora Límite</span><span class="value vencimiento">${venc.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span></div>
-
-                    <div class="rotulo ${claseDia}">
-                        <div class="rotulo-header">${p.insumo}</div>
-                        <div class="rotulo-day">${nombreDia}</div>
-                        <div class="rotulo-date">${venc.toLocaleDateString()} ${venc.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</div>
-                    </div>
+                    <div class="row"><span class="label">Hora Límite</span><span class="value vencimiento">${venc.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
                 </div>
             `;
-        });
-    }
-</script>
+            });
+        }
+    </script>
 </body>
+
 </html>
