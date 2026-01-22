@@ -326,6 +326,18 @@
                 const claseDia = obtenerClaseDia(diaVencimiento);
                 const nombreDia = obtenerNombreDia(diaVencimiento);
 
+                const esDescongelacion = p.area.toLowerCase().includes('descongelación');
+                let bloqueCalculo = "";
+
+                if (esDescongelacion) {
+                    bloqueCalculo = `
+                    <div class="tag-status">CÁLCULO DE VENCIMIENTO</div>
+                    <div class="row"><span class="label">Inicio</span><span class="value">${ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+                    <div class="row"><span class="label">Vence el</span><span class="value vencimiento">${venc.toLocaleDateString()}</span></div>
+                    <div class="row"><span class="label">Hora Límite</span><span class="value vencimiento">${venc.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+                    `;
+                }
+
                 res.innerHTML += `
                 <div class="card">
                     <div class="rotulo ${claseDia}">
@@ -339,10 +351,7 @@
                     <div class="row"><span class="label">Condición</span><span class="value">${p.condicion}</span></div>
                     <div class="row"><span class="label">Vida Útil</span><span class="value">${formatearTiempo(p.n_horas)}</span></div>
                     
-                    <div class="tag-status">CÁLCULO DE VENCIMIENTO</div>
-                    <div class="row"><span class="label">Inicio</span><span class="value">${ahora.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
-                    <div class="row"><span class="label">Vence el</span><span class="value vencimiento">${venc.toLocaleDateString()}</span></div>
-                    <div class="row"><span class="label">Hora Límite</span><span class="value vencimiento">${venc.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></div>
+                    ${bloqueCalculo}
                 </div>
             `;
             });
